@@ -90,8 +90,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         tracker = new MultiBoxTracker(this);
 
-        final int modelIndex = modelView.getCheckedItemPosition();
-        final String modelString = modelStrings.get(modelIndex);
+        // final int modelIndex = modelView.getCheckedItemPosition();
+        // final String modelString = modelStrings.get(modelIndex);
+        
+        final String modelString = "doggie-fp16.tflite";
 
         try {
             detector = DetectorFactory.getDetector(getAssets(), modelString);
@@ -143,17 +145,21 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     protected void updateActiveModel() {
         // Get UI information before delegating to background
-        final int modelIndex = modelView.getCheckedItemPosition();
+        // final int modelIndex = modelView.getCheckedItemPosition();
         final int deviceIndex = deviceView.getCheckedItemPosition();
         String threads = threadsTextView.getText().toString().trim();
         final int numThreads = Integer.parseInt(threads);
 
         handler.post(() -> {
-            if (modelIndex == currentModel && deviceIndex == currentDevice
+            // if (modelIndex == currentModel && deviceIndex == currentDevice
+            //         && numThreads == currentNumThreads) {
+            //     return;
+            // }
+            if (deviceIndex == currentDevice
                     && numThreads == currentNumThreads) {
                 return;
             }
-            currentModel = modelIndex;
+            // currentModel = modelIndex;
             currentDevice = deviceIndex;
             currentNumThreads = numThreads;
 
@@ -164,7 +170,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             }
 
             // Lookup names of parameters.
-            String modelString = modelStrings.get(modelIndex);
+            String modelString = "doggie-fp16.tflite";
             String device = deviceStrings.get(deviceIndex);
 
             LOGGER.i("Changing model to " + modelString + " device " + device);

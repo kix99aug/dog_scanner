@@ -82,8 +82,8 @@ public abstract class CameraActivity extends AppCompatActivity
   private byte[][] yuvBytes = new byte[3][];
   private int[] rgbBytes = null;
   private int yRowStride;
-  protected int defaultModelIndex = 0;
-  protected int defaultDeviceIndex = 0;
+  // protected int defaultModelIndex = 0;
+  protected int defaultDeviceIndex = 1;
   private Runnable postInferenceCallback;
   private Runnable imageConverter;
   protected ArrayList<String> modelStrings = new ArrayList<String>();
@@ -97,7 +97,7 @@ public abstract class CameraActivity extends AppCompatActivity
   private ImageView plusImageView, minusImageView;
   protected ListView deviceView;
   protected TextView threadsTextView;
-  protected ListView modelView;
+  // protected ListView modelView;
   /** Current indices of device and model. */
   int currentDevice = -1;
   int currentModel = -1;
@@ -149,23 +149,23 @@ public abstract class CameraActivity extends AppCompatActivity
     gestureLayout = findViewById(R.id.gesture_layout);
     sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
     bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
-    modelView = findViewById((R.id.model_list));
+    // modelView = findViewById((R.id.model_list));
 
-    modelStrings = getModelStrings(getAssets(), ASSET_PATH);
-    modelView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-    ArrayAdapter<String> modelAdapter =
-            new ArrayAdapter<>(
-                    CameraActivity.this , R.layout.listview_row, R.id.listview_row_text, modelStrings);
-    modelView.setAdapter(modelAdapter);
-    modelView.setItemChecked(defaultModelIndex, true);
-    currentModel = defaultModelIndex;
-    modelView.setOnItemClickListener(
-            new AdapterView.OnItemClickListener() {
-              @Override
-              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                updateActiveModel();
-              }
-            });
+    // modelStrings = getModelStrings(getAssets(), ASSET_PATH);
+    // modelView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    // ArrayAdapter<String> modelAdapter =
+    //         new ArrayAdapter<>(
+    //                 CameraActivity.this , R.layout.listview_row, R.id.listview_row_text, modelStrings);
+    // modelView.setAdapter(modelAdapter);
+    // modelView.setItemChecked(defaultModelIndex, true);
+    // currentModel = defaultModelIndex;
+    // modelView.setOnItemClickListener(
+    //         new AdapterView.OnItemClickListener() {
+    //           @Override
+    //           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    //             updateActiveModel();
+    //           }
+    //         });
 
     ViewTreeObserver vto = gestureLayout.getViewTreeObserver();
     vto.addOnGlobalLayoutListener(
